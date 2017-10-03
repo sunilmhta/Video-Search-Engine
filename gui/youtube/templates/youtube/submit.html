@@ -1,0 +1,297 @@
+<!-- {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel="icon" href="https://i.ytimg.com/vi/omp7cFYtE1I/hqdefault.jpg" type="image/jpg" >
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Gaurav Sunil Shivam vishal">
+
+    <title>My Tube</title>
+    {% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'youtube/css/mystyle.css' %} ">
+    <link  rel="stylesheet" type="text/css" href="{% static 'youtube/css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" type="text/css" href="{% static 'youtube/css/portfolio-item.css' %}"  >
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid" style="  border-bottom: 2px solid #00b386;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                {% load static %}
+                 <a href="http://www.iitg.ernet.in" target="_blank" ><img  title="IIT Guwahati" class="rotating" src="{% static 'youtube/img/iitlogo.png' %}"
+                        style="position:absolute; margin-left:-10px; margin-top:3px;
+                        width:40px; height:40px;" alt="logo">
+                  </a>
+                <a href="{% url 'youtube:index'%} " class="navbar-brand" href="" style="float:left;" title="My Tube Home" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Tube</a>
+            </div>
+            <form  method="GET" action="/submit/">
+              {% csrf_token %}
+              <input name="search_key_text" type="text" size="85" placeholder="search videos.." style="margin-left:95px; margin-top:7px; font-size: 17px; font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-color:red;" required >
+       		  {%load static%}
+     		   <input type="image" src="{%static 'youtube/img/search-icon.png'%}" alt="Submit" width="28" height="28"
+  					    style="position:absolute; margin-left:-30px; margin-top:8px;">
+  			</form>
+               <ul class="nav navbar-nav " style=" float:right; margin-top:-40px;  " >
+                    <li>
+                        <a href="#">Upload</a>
+                    </li>
+                    <li>
+                        <a href="#">Notification</a>
+                    </li>
+                    <li id="login"  >
+                        <a href="{% url 'youtube:login'%} ">Login</a>
+                    </li>
+               </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+
+
+        </div>
+        <div class="row" >
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Related Videos</h3>
+            </div>
+            {% if message %}
+				{% for i in message|slice:"20"  %}
+
+            <div class="col-lg-12"  >
+					<div class="col-sm-4 col-xs-4">
+		                 <a href="{% url 'youtube:watch' i.0.0.videoInfo.id %}">
+		                    <img class="img-responsive portfolio-item" src="{{i.0.0.videoInfo.snippet.thumbnails.default.url}}" alt="" width="30%" height="30%" >
+		                </a>
+	            	</div>
+	            	<div class="col-sm-8 col-xs-8" style=""  >
+		                <a href="{% url 'youtube:watch' i.0.0.videoInfo.id %}">
+		                 <h4 class="img-responsive portfolio-item" alt="" width="30%" height="30%"  >{{i.0.0.videoInfo.snippet.title}} </h4>
+		                 <p>{{i.0.0.videoInfo.snippet.channelTitle}}  </p>
+		                 <p>{{i.0.0.videoInfo.statistics.viewCount}} Views</p>
+		                 <p>{{i.0.0.videoInfo.snippet.description|slice:":100"}}...</p>
+		                </a>
+	            	</div>
+
+	        </div>
+	       <hr>
+				{% endfor %}
+			{% endif %}
+			{% if not message %}
+				<h2 style="color:red; text-align: center;">-----   sorry, no result found  ------</h2>
+
+			{% endif %}
+        </div>
+        <hr>
+        <footer style=" position:fixed; bottom:0;">
+            <div class="row">
+                <div class="col-lg-12">
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    {%load static%}
+    <script src="{%static 'youtube/js/jquery.js'%}"></script>
+    <script src="{%static 'youtube/js/bootstrap.min.js'%}"></script>
+
+</body>
+
+</html>
+
+{% endblock %} -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="{%static 'youtube/img/search-icon.png'%}"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>My Tube</title>
+    <link rel="stylesheet" type="text/css" href="{%static 'youtube/css/mystyle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'youtube/css/simple-sidebar.css'%}">
+
+    <link href="{%static 'youtube/css/bootstrap.min.css'%}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{%static 'youtube/css/portfolio-item.css'%}" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+            <div id="wrapper" style="position:absolute; margin-top:-17px;">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#" ">
+                        Menu
+                    </a>
+
+                </li>
+                                <hr style="border-color:red; position:relative; margin-top:0px;">
+
+                <li>
+                    <a href="#">Bookmarks</a>
+                </li>
+                <li>
+                    <a href="#">History</a>
+                </li>
+                <li>
+                    <a href="#">Subscriptions</a>
+                </li>
+                <li>
+                    <a href="#">Channels</a>
+                </li>
+                <li>
+                    <a href="#">Trending</a>
+                </li>
+                <li>
+                    <a href="#">Watch Later</a>
+                </li>
+                <li>
+                    <a href="#">Log-out</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="background-color:#a7adba; width:1px;border:none; outline:0;  min-height: 100%; position:fixed; z-index:999 ;text-align: center; border-right:1px solid black; box-shadow: 5px 5px 5px #888888;" ></a>
+
+
+    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+        <div class="container-fluid" style="  border-bottom: 2px solid #00b386;">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                 <img class="rotating" src="{%static 'youtube/img/iitlogo.png'%}"
+                        style="position:absolute; margin-left:-0px; margin-top:3px;
+                        width:40px; height:40px;">
+                <a class="navbar-brand" href=" {% url 'youtube:index' %}" style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Tube</a>
+            </div>
+
+        <form  method="GET" action="/submit/" style="height: 12px;" >
+              {% csrf_token %}
+            <input type="text" name="search_key_text" size="85" placeholder="search videos.." required="required" style="margin-left:75px; margin-top:7px; font-size: 17px; font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-color:red; height: 35px; ">
+                    <!-- <input type="submit" value="search" style="font-size: 13pt; margin:left:-20px;">
+                     -->    <input type="image" src="{%static 'youtube/img/search-icon.png'%}" alt="Submit" width="28" height="28"
+                        style="position:absolute; margin-left:-30px; margin-top:6px;">
+        </form>
+        <ul class="nav navbar-nav " style=" float:right;" style="padding-top: -100px;" >
+                    <li>
+                        <a href="./upload.html">Upload</a>
+                    </li>
+                    <li>
+                        <a href="#">Notification</a>
+                    </li>
+                    <li id="login"  >
+                        <a href="{% url 'youtube:login' %}">{{username}}</a>
+                    </li>
+               </ul>
+       <!--      </div>
+        -->  <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Portfolio Item Heading -->
+        <div class="row" >
+            <div class="col-lg-12">
+                <h1 class="page-header text-center ">Searched Videos
+                </h1>
+            </div>
+        </div>
+
+    {% if  flag %}
+        <h3 style="color:red; text-align: center;">did you mean: {{flag}}</h3>
+
+    {% endif %}
+
+    {% if message %}
+        {% for i in message|slice:"20"  %}
+            <br>
+        <a href=' {% url 'youtube:watch' i.0.0.videoInfo.id %} ' style="text-decoration: none; ">
+        <div class="container row" style="margin-left:100px;  border:1px solid #A9A9A9; height:230px; width:950px;">
+
+        <div class="col-lg-3" style="padding:0px; height:200px; ">
+        <img src="{{i.0.0.videoInfo.snippet.thumbnails.default.url}}" style="height:90%; width:100%; margin-top:10px;" >
+        </div>
+        <div class="col-lg-9">
+            <u><h4>{{i.0.0.videoInfo.snippet.title|slice:":50"}}</h4></u>
+            <font  color="black">
+            <p>{{i.0.0.videoInfo.snippet.description|slice:":100"}}...</p>
+            <strong>channelId :</strong> {{i.0.0.videoInfo.snippet.channelId}}...<br>
+            <strong>publishedAt : </strong>{{i.0.0.videoInfo.snippet.publishedAt}}<br>
+            <strong>liveBroadcastContent :</strong> {{i.0.0.videoInfo.snippet.liveBroadcastContent}}<br>
+            <strong>channelTitle : </strong>{{i.0.0.videoInfo.snippet.channelTitle}}<br>
+
+        <div class="row" >
+        <div class="col-xs-2">
+        <img src="{%static 'youtube/img/like.png'%}"><p>{{i.0.0.videoInfo.statistics.likeCount}}</p>
+        </div>
+        <div class="col-xs-2">
+        <img src="{%static 'youtube/img/dislike.png'%}"><p>{{i.0.0.videoInfo.statistics.dislikeCount}}</p>
+        </div>
+        <div class="col-xs-2">
+        <img src="{%static 'youtube/img/view.png'%}"><p>{{i.0.0.videoInfo.statistics.viewCount}}</p>
+        </div>
+            </div>
+        </font>
+
+
+        </div>
+
+        </font-color>
+        </div>
+        </a>
+
+
+        {% endfor %}
+    {% endif %}
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="{% static 'youtube/js/jquery.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'youtube/js/bootstrap.min.js' %} "></script>
+     <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>

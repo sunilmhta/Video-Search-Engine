@@ -1,0 +1,211 @@
+{%block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel="icon" href="https://i.ytimg.com/vi/omp7cFYtE1I/hqdefault.jpg" type="image/jpg" >
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Gaurav Sunil Shivam vishal">
+
+    <title>My Tube</title>
+    {% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'youtube/css/mystyle.css' %} ">
+    <link  rel="stylesheet" type="text/css" href="{% static 'youtube/css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" type="text/css" href="{% static 'youtube/css/portfolio-item.css' %}"  >
+    <link rel="stylesheet" href="footer-distributed-with-contact-form.css">
+    <link rel="stylesheet" type="text/css" href=" {%static 'youtube/assets/css/main.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'youtube/css/mystyle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'youtube/css/simple-sidebar.css'%}">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+    <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{%static 'youtube/css/bootstrap.min.css'%}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{%static 'youtube/css/portfolio-item.css'%}" rel="stylesheet">
+<script >
+</script>
+<script >
+    var like=0;
+    var dlike=0;
+    function increaseCount(){
+        if(dlike==0&&like==0){
+            var likes=document.getElementById("likeCount").innerHTML;
+            document.getElementById("likeCount").innerHTML=+likes+1
+            like=1;
+        }
+        else if(dlike==0&&like==1){
+            var likes=document.getElementById("likeCount").innerHTML;
+            document.getElementById("likeCount").innerHTML=+likes-1
+            like=0;
+        }
+        else if(dlike==1&&like==0){
+            var dislike=document.getElementById("dislikeCount").innerHTML;
+            document.getElementById("dislikeCount").innerHTML=+dislike-1
+            dlike=0;
+            var likes=document.getElementById("likeCount").innerHTML;
+            document.getElementById("likeCount").innerHTML=+likes+1
+            like=1;
+        }
+    }
+    function decreaseCount(){
+        if(dlike==0&&like==0){
+            var dislike=document.getElementById("dislikeCount").innerHTML;
+            document.getElementById("dislikeCount").innerHTML=+dislike+1
+            dlike=1;
+        }
+        else if(dlike==1&&like==0){
+            var dislike=document.getElementById("dislikeCount").innerHTML;
+            document.getElementById("dislikeCount").innerHTML=+dislike-1
+            dlike=0;
+        }
+        else if(dlike==0&&like==1){
+            var dislike=document.getElementById("dislikeCount").innerHTML;
+            document.getElementById("dislikeCount").innerHTML=+dislike+1
+            dlike=1;
+            var likes=document.getElementById("likeCount").innerHTML;
+            document.getElementById("likeCount").innerHTML=+likes-1
+            like=0;
+        }
+    }
+
+</script>
+
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid" style="  border-bottom: 2px solid #00b386;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                {% load static %}
+                 <a href="http://www.iitg.ernet.in" target="_blank" ><img  title="IIT Guwahati" class="rotating" src="{% static 'youtube/img/iitlogo.png' %}"
+                        style="position:absolute; margin-left:-10px; margin-top:3px;
+                        width:40px; height:40px;" alt="logo">
+                  </a>
+                <a href="{% url 'youtube:index'  %}" class="navbar-brand" href="" style="float:left;" title="My Tube Home" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Tube</a>
+            </div>
+            <form  method="GET" action="/submit/">
+              {% csrf_token %}
+              <input name="search_key_text" type="text" size="85" placeholder="search videos.." style="margin-left:95px; margin-top:7px; font-size: 17px; font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-color:red;" required >
+       		  {%load static%}
+     		   <input type="image" src="{%static 'youtube/img/search-icon.png'%}" alt="Submit" width="28" height="28"
+  					    style="position:absolute; margin-left:-30px; margin-top:8px;">
+  			</form>
+               <ul class="nav navbar-nav " style=" float:right; margin-top:-40px;  " >
+                    <li>
+                        <a href="#">Upload</a>
+                    </li>
+                    <li>
+                        <a href="#">Notification</a>
+                    </li>
+                    <li id="login"  >
+                        <a href="{% url 'youtube:login' %}">{{username}}</a>
+                    </li>
+               </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="page-header"> {{ current_detail.videoInfo.snippet.title }}
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-8">
+
+             <iframe id="mainVideo" width="680" height="400" src="https://www.youtube.com/embed/5Q4mZk4Bc38?autoplay=1" allowfullscreen >
+             </iframe>
+            <script type="text/javascript">
+            var fullUrl=String(document.location);
+            var url_length=fullUrl.length;
+            var i=url_length;
+            for(i=url_length-2;i>=0;i--){
+            	if(fullUrl.charAt(i)=='/')
+            		break;
+            }
+            i++;
+            var mainVideoUrl=fullUrl.substring(i,url_length-1);
+             mainVideoUrl="https://www.youtube.com/embed/"+mainVideoUrl+"?autoplay=1 allowfullscreen";
+             document.getElementById("mainVideo").src=mainVideoUrl;
+
+            </script>
+            </div>
+
+            <div class="col-md-4">
+                <h3>Video Description</h3>
+                <p>{{current_detail.videoInfo.snippet.description|slice:":250"}}... </p>
+                <strong>channel id : </strong>{{current_detail.videoInfo.snippet.channelId}}<br>
+                <strong>Published At : </strong>{{current_detail.videoInfo.snippet.publishedAt}}<br>
+                <strong>Channel Title : </strong>{{current_detail.videoInfo.snippet.channelTitle}}<br>
+                <strong>liveBroadcastContent : </strong>{{current_detail.videoInfo.snippet.liveBroadcastContent}}<br><br><br>
+                <div class="row" >
+        <div class="col-xs-2" style="cursor: pointer;" >
+        <img src="{%static 'youtube/img/like.png'%}"  onclick="increaseCount();" id="likeImage">
+        <p  id="likeCount" >{{current_detail.videoInfo.statistics.likeCount}}</p>
+        </div>
+        <div class="col-xs-2" style="cursor: pointer;">
+        <img src="{%static 'youtube/img/dislike.png'%}" onclick="decreaseCount();" id="dislikeImage" ><p id="dislikeCount" >{{current_detail.videoInfo.statistics.dislikeCount}}</p>
+        </div>
+        <div class="col-xs-2">
+        <img src="{%static 'youtube/img/view.png'%}"><p>{{current_detail.videoInfo.statistics.viewCount}}</p>
+        </div>
+            </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+        <div class="col-lg-12">
+            <h3 class="page-header" style="color: red;" >Related Videos</h3>
+        </div>
+<div class="container-fluid" >
+    {% for key,value in message.items|slice:"12" %}
+    <div id="under" class="col-lg-12  " style=" height:260px; width:400px;position: relative; margin-left: 110px; float:right" >
+         <a href="{% url 'youtube:watch' value.videoInfo.id %}">
+         <div class="col-sm-4 col-xs-4" id="cool2" style=" height:250px; width:400px;">
+            <div class="wrapper" >
+                <img src="{{value.videoInfo.snippet.thumbnails.default.url}}" class="hover thumb" style="background-color:2px solid green; "/>
+            </div>
+            <strong>{{value.videoInfo.snippet.description|slice:":50"}}<br>
+            Channel: </strong>{{value.videoInfo.snippet.channelTitle}}
+
+        </div>
+        </a>
+
+    </div>
+</div>
+            {% endfor %}
+        <hr>
+        <footer>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Our Website 2017</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    {%load static%}
+    <script src="{%static 'youtube/js/jquery.js'%}"></script>
+    <script src="{%static 'youtube/js/bootstrap.min.js'%}"></script>
+
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<script>
+
+    window.fbAsyncInit = function() {
+            FB.init({
+            appId: '181347822253454',
+            status: true,
+            cookie: true,
+            xfbml: true
+        });
+    };
+
+    // Load the SDK asynchronously
+    (function(d){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    ref.parentNode.insertBefore(js, ref);
+    }(document));
+
+    function login() {
+        FB.login(function(response) {
+
+        // handle the response
+        console.log("Response goes here!");
+
+        }, {scope: 'read_stream,publish_stream,publish_actions,read_friendlists'});
+    }
+
+    function logout() {
+        FB.logout(function(response) {
+          // user is now logged out
+        });
+    }
+
+    var status = FB.getLoginStatus();
+
+    console.log(status);
+
+
+</script>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>My Tube Login &amp; Register </title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        {%load static %}
+        <link rel="stylesheet" href="{%static 'youtube/assets/bootstrap/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{%static 'youtube/assets/font-awesome/css/font-awesome.min.css'%}">
+        <link rel="stylesheet" href="{%static 'youtube/assets/css/form-elements.css'%}">
+        <link rel="stylesheet" href="{%static 'youtube/assets/css/style.css'%}">
+        <link rel="shortcut icon" href="{%static 'youtube/assets/ico/favicon.png'%}">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{%static 'youtube/assets/ico/apple-touch-icon-144-precomposed.png'%}">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{%static 'youtube/assets/ico/apple-touch-icon-114-precomposed.png'%}">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{%static 'youtube/assets/ico/apple-touch-icon-72-precomposed.png'%}">
+        <link rel="apple-touch-icon-precomposed" href="{%static 'youtube/assets/ico/apple-touch-icon-57-precomposed.png'%}">
+
+    </head>
+  {%load static%}
+  <body style="background-image: url('{%static 'youtube/assets/img/backgrounds/1.jpg'  %}');" >
+       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid" style="  border-bottom: 2px solid #00b386;">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              {% load static %}
+               <a href="http://www.iitg.ernet.in" target="_blank" ><img  title="IIT Guwahati" class="rotating" src="{% static 'youtube/img/iitlogo.png' %}"
+                      style="position:absolute; margin-left:-70px; margin-top:3px;
+                      width:40px; height:40px;" alt="logo">
+                </a>
+              <a class="navbar-brand" href="{% url 'youtube:index'%} " style="float:left;" title="My Tube Home" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Tube</a>
+          </div>
+          <form  method="GET" action="/submit/" >
+            {% csrf_token %}
+            <input name="search_key_text" type="text" size="85" placeholder="search videos.." style="margin-left:-400px; margin-top:7px; font-size: 17px; font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-color:red; height: 35px; " required  >
+            {%load static%}
+             <input type="image" src="{%static 'youtube/img/search-icon.png'%}" alt="Submit" width="32" height="32"
+                      style="position:absolute; margin-left:-40px; margin-top:10px;">
+          </form>
+             <ul class="nav navbar-nav " style=" float:right; margin-top:-40px;  " >
+                  <li>
+                      <a href="#">Upload</a>
+                  </li>
+                  <li>
+                      <a href="#">Notification</a>
+                  </li>
+                  <li id="login"  >
+                      <a href="{% url 'youtube:login'%} ">Login</a>
+                  </li>
+             </ul>
+      </div>
+  </nav>
+
+      <div class="top-content">
+
+          <div class="inner-bg">
+              <div class="container">
+
+                  <div class="row">
+                      <div class="col-sm-8 col-sm-offset-2 text">
+                          <h1><strong>My-Tube</strong> Login &amp; Register Forms</h1>
+                          <div class="description">
+                              <p>
+                                  Please enter all details <strong>"correct"</strong>
+                                  We wish a long stay with you
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-sm-5">
+
+                          <div class="form-box">
+                              <div class="form-top">
+                                  <div class="form-top-left">
+                                      <h3>Login</h3>
+                                      <p>Enter username and password to log on:</p>
+                                  </div>
+                                  <div class="form-top-right">
+                                      <i class="fa fa-lock"></i>
+                                  </div>
+                              </div>
+                              <div class="form-bottom">
+                                  <form role="form" action="/checklogin/" method="POST" class="login-form">
+                                      {% csrf_token %}
+                                      <div class="form-group">
+                                          <label class="sr-only" for="form-username">Username</label>
+                                          <input type="text" name="username" placeholder="Username..." class="form-username form-control" id="form-username">
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="sr-only" for="form-password">Password</label>
+                                          <input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password">
+                                      </div>
+                                      <button type="submit" class="btn">Sign in!</button>
+                                  </form>
+                              </div>
+                          </div>
+
+                          <div class="social-login">
+                              <h3>...or login with:</h3>
+                              <div class="social-login-buttons">
+                                  <!-- <button ></button> -->
+                                  <a  onclick="javascript:login();" class="btn btn-link-2" href="#">
+                                      <i class="fa fa-facebook"></i> Facebook
+                                  </a>
+                                  <a class="btn btn-link-2" href="#">
+                                      <i class="fa fa-twitter"></i> Twitter
+                                  </a>
+                                  <a class="btn btn-link-2" href="#">
+                                      <i class="fa fa-google-plus"></i> Google Plus
+                                  </a>
+                              </div>
+                          </div>
+
+                      </div>
+
+                      <div class="col-sm-1 middle-border"></div>
+                      <div class="col-sm-1"></div>
+
+                      <div class="col-sm-5">
+
+                          <div class="form-box">
+                              <div class="form-top">
+                                  <div class="form-top-left">
+                                      <h3>Sign up now</h3>
+                                      <p>Fill in the form below to get instant access:</p>
+                                  </div>
+                                  <div class="form-top-right">
+                                      <i class="fa fa-pencil"></i>
+                                  </div>
+                              </div>
+                              <div class="form-bottom">
+                                  <form role="form" action="/thanks/" method="POST" class="registration-form">
+                                      {% csrf_token %}
+                                      <div class="form-group">
+                                          <label class="sr-only" for="first_name">First name</label>
+                                          <input type="text" name="first_name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="sr-only" for="last_name">Last name</label>
+                                          <input type="text" name="last_name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="sr-only" for="email">Email</label>
+                                          <input type="email" name=email" placeholder="Email..." class="form-email form-control" id="form-email">
+                                      </div>
+                                      <!-- <div class="form-group">
+                                          <label class="sr-only" for="form-about-yourself">About yourself</label>
+                                          <textarea name="form-about-yourself" placeholder="About yourself..."
+                                                      class="form-about-yourself form-control" id="form-about-yourself"></textarea>
+                                      </div> -->
+                                      <button type="submit" class="btn">Sign me up!</button>
+                                  </form>
+                              </div>
+                          </div>
+
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+
+      </div>
+
+      <!-- Footer -->
+      <footer>
+          <div class="container">
+              <div class="row">
+
+                  <div class="col-sm-8 col-sm-offset-2">
+                      <div class="footer-border"></div>
+                      <p>Made by Goup-xxx at <strong>Database lab</strong></a>
+                          by iitg 3rd year students <i class="fa fa-smile-o"></i></p>
+                  </div>
+
+              </div>
+          </div>
+      </footer>
+
+      <!-- Javascript -->
+      <script src="{%static 'youtube/assets/js/jquery-1.11.1.min.js'%}"></script>
+      <script src="{%static 'youtube/assets/bootstrap/js/bootstrap.min.js'%}"></script>
+      <script src="{%static 'youtube/assets/js/jquery.backstretch.min.js'%}"></script>
+      <script src="{%static 'youtube/assets/js/scripts.js'%}"></script>
+
+      <!--[if lt IE 10]>
+          <script src="assets/js/placeholder.js"></script>
+      <![endif]-->
+
+  </body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel="shortcut icon" type="image/png" href="search-icon.png"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>My Tube-upload</title>
+	<link rel="stylesheet" type="text/css" href="mystyle.css">
+<link rel="stylesheet" type="text/css" href="upload.css">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+      					
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid" style="  border-bottom: 2px solid #00b386;">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                 <img class="rotating" src="iitlogo.png" 
+                        style="position:absolute; margin-left:-140px; margin-top:3px;
+                        width:40px; height:40px;">
+                <a class="navbar-brand" href="./index.html" style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Tube</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+ <!--                <div class="">
+  -->               <input type="text" size="85" placeholder="search videos.." style="margin-left:75px; margin-top:7px; font-size: 17px; font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-color:red;">
+  					<!-- <input type="submit" value="search" style="font-size: 13pt; margin:left:-20px;">
+  					 -->    <input type="image" src="search-icon.png" alt="Submit" width="38" height="38"
+  					    style="position:absolute; margin-left:-30px; margin-top:6px;">
+
+<!-- 
+                </div>	
+ -->                <ul class="nav navbar-nav " style=" float:right;">
+                    <li>
+                        <a href="#">Upload</a>
+                    </li>
+                    <li>
+                        <a href="#">Notification</a>
+                    </li>
+                    <li id="login"  >
+                        <a href="./form-2/index.html">Login</a>
+                    </li>
+               </ul>
+       <!--      </div>
+        -->  <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Portfolio Item Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Please Upload your file here.
+                    <small> </small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+<div class="container"> <br />
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Upload files</strong> <small> </small></div>
+                <div class="panel-body">
+                    <div class="input-group image-preview">
+                        <input placeholder="choose file....." type="text" class="form-control image-preview-filename" disabled="disabled">
+                        <!-- don't give a name === doesn't send on POST/GET --> 
+                        <span class="input-group-btn"> 
+                        <!-- image-preview-clear button -->
+                        <button type="button" class="btn btn-default image-preview-clear" style="display:none;"> <span class="glyphicon glyphicon-remove"></span> Clear </button>
+                        <!-- image-preview-input -->
+                        <div class="btn btn-default image-preview-input"> <span class="glyphicon glyphicon-folder-open"></span> <span class="image-preview-input-title">Browse</span>
+                            <input type="file" accept="image/png, image/jpeg, image/gif,video/mp4" name="input-file-preview"/>
+                            <!-- rename it --> 
+                        </div>
+                        <button type="button" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-upload"></i> </span>Upload</button>
+                        </span> </div>
+                    <!-- /input-group image-preview [TO HERE]--> 
+                    
+                    <br />
+                    
+                    <!-- Drop Zone -->
+                    <div class="upload-drop-zone" id="drop-zone"> Or drag and drop files here </div>
+                    <br />
+                    <!-- Progress Bar -->
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"> <span class="sr-only">60% Complete</span> </div>
+                    </div>
+                    <br />
+
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+        
+       
+       
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

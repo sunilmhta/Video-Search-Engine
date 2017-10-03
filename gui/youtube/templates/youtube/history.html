@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>History</title>
+	{% load static %}
+    <link rel="shortcut icon" type="image/png" href="{%static 'youtube/img/search-icon.png'%}"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>My Tube</title>
+    {% load static %}
+    <link rel="stylesheet" href="footer-distributed-with-contact-form.css">
+    <link rel="stylesheet" type="text/css" href=" {%static 'youtube/assets/css/main.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'youtube/css/mystyle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'youtube/css/simple-sidebar.css'%}">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+    <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{%static 'youtube/css/bootstrap.min.css'%}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{%static 'youtube/css/portfolio-item.css'%}" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+        <div class="container-fluid" style="  border-bottom: 2px solid #00b386;">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                 <img class="rotating" src="{%static 'youtube/img/iitlogo.png'%}"
+                        style="position:absolute; margin-left:0px; margin-top:3px;
+                        width:40px; height:40px;">
+                <a class="navbar-brand" href="{%url 'youtube:index' %}" style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Tube</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+ <!--                <div class="">
+
+  -->
+
+            <form  method="GET" action="/submit/" style="height: 12px;" >
+              {% csrf_token %}
+            <input type="text"  name="search_key_text" size="85" placeholder="search videos" id = "tags" required="required" style="margin-left:75px; margin-top:7px; font-size: 17px; font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-color:red; height: 35px; ">
+                    <!-- <input type="submit" value="search" style="font-size: 13pt; margin:left:-20px;">
+                     -->    <input type="image" src="{%static 'youtube/img/search-icon.png'%}" alt="Submit" width="28" height="28"
+                        style="position:absolute; margin-left:-30px; margin-top:6px;">
+            </form>
+<!--
+                </div>
+ -->                <ul class="nav navbar-nav " style=" float:right;">
+                    <li>
+                        <a href="./upload.html">Upload</a>
+                    </li>
+                    <li>
+                        <a href="#">Notification</a>
+                    </li>
+                    <li id="login"  >
+                        <a href="{% url 'youtube:login' %}">{{user_id}}</a>
+                    </li>
+               </ul>
+       <!--      </div>
+        -->  <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+	<div class="container" >
+    <font color="red"><strong>your history <br><br> </strong></font>
+	 <div id="under" >
+	{% if user_id %}
+    {% for key,value in message.items|slice:"20" %}
+
+    <a href="{% url 'youtube:watch' value.videoInfo.id %}">
+    <div class="col-sm-3 col-xs-3" id="cool2">
+        <div class="wrapper">
+            <img src="{{value.videoInfo.snippet.thumbnails.default.url}}" class="hover thumb" />
+        </div>
+     <strong>{{value.videoInfo.snippet.description|slice:":50"}}<br>
+     Channel: </strong>{{value.videoInfo.snippet.channelTitle}}
+
+    </div>
+    </a>
+
+    {% endfor %}
+	{% endif %}
+    </div>
+    <!-- {% if not user_id %}
+        please login
+    {% endif %} -->
+</div>
+
+</script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+#suck{
+
+}
+#suck:hover{
+    box-shadow: 5px 5px 5px #888888;
+    border:2px solid green;
+    width:700px;
+    height:auto;
+    position :absolute;
+    display:block;
+    z-index:999;
+}
+div.lol{
+	background-color: red;
+	font-color:red;
+}
+
+#login{
+	float: right;
+}
+
+.rotating{
+	  -webkit-animation: rotating 2s linear infinite;
+}
+
+
+@-webkit-keyframes rotating {
+    from{
+        -webkit-transform: rotate(0deg);
+    }
+    to{
+        -webkit-transform: rotate(360deg);
+    }
+}

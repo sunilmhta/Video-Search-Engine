@@ -1,0 +1,39 @@
+.wrapper .text {
+	font-weight: bold;
+	text-decoration: none;
+	vertical-align: middle;
+position:relative;
+bottom:100px;
+left:0px;
+visibility:hidden;
+}
+
+
+.wrapper:hover .text {
+visibility:visible;
+}
+.thumb{
+	height:180px;
+	width:auto;
+}
+
+.thumb:hover{
+	z-index: 9999;
+	 opacity: 0.4;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+
+
+/*   perfect*/
+#under{
+	height:200px; padding:0px;margin: 10px 5px 0px 0px;
+	position: relative;
+	margin-bottom: 50px;
+}
+
+#cool2{
+	text-align: center;
+	padding-bottom: 5px;
+}
+
